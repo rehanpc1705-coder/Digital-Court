@@ -1,178 +1,1753 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Court Management System</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Court Management System | e-Judiciary Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- Login Section -->
-<div id="loginPage" class="login-container">
+  <!-- ==========================================================================
+       SVG SPRITE DEFINITIONS (100% Offline Vector Icons)
+       ========================================================================== -->
+  <svg style="display: none;">
+    <defs>
+      <!-- Scales of Justice -->
+      <g id="icon-scales">
+        <path d="M12 2v20M5 7l7-3 7 3M5 7a4 4 0 0 0 8 0M11 7a4 4 0 0 0 8 0M2 19h20M7 22h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Gavel -->
+      <g id="icon-gavel">
+        <path d="M14 13l-7 7a2.1 2.1 0 0 1-3-3l7-7M16 4l4 4-2 2-4-4 2-2zM12 8l4 4-2 2-4-4 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Dashboard -->
+      <g id="icon-dashboard">
+        <rect x="3" y="3" width="7" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="14" y="3" width="7" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="14" y="12" width="7" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="3" y="16" width="7" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <!-- Briefcase / Docket -->
+      <g id="icon-docket">
+        <rect x="2" y="7" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- File Plus (e-Filing) -->
+      <g id="icon-file-plus">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="12" y1="18" x2="12" y2="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="9" y1="15" x2="15" y2="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Calendar (Cause List) -->
+      <g id="icon-calendar">
+        <rect x="3" y="4" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <!-- Video (Virtual Court) -->
+      <g id="icon-video">
+        <polygon points="23 7 16 12 23 17 23 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="1" y="5" width="15" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <!-- Scroll / Orders -->
+      <g id="icon-orders">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Bell (Notifications) -->
+      <g id="icon-bell">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Search -->
+      <g id="icon-search">
+        <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Mail / Notice -->
+      <g id="icon-mail">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Book (Precedents) -->
+      <g id="icon-book">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <!-- Check Circle -->
+      <g id="icon-check">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Clock -->
+      <g id="icon-clock">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+        <polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Logout -->
+      <g id="icon-logout">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- Printer -->
+      <g id="icon-printer">
+        <polyline points="6 9 6 2 18 2 18 9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <rect x="6" y="14" width="12" height="8" fill="none" stroke="currentColor" stroke-width="2"/>
+      </g>
+      <!-- Close -->
+      <g id="icon-close">
+        <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Mic -->
+      <g id="icon-mic">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </defs>
+  </svg>
 
-    <div class="login-box">
-        <h1>Digital Court</h1>
-        <p class="subtitle">Management System</p>
+  <!-- ==========================================================================
+       LOGIN PAGE
+       ========================================================================== -->
+  <div id="loginPage" class="login-container">
+    <div class="login-card">
+      <div class="court-seal">
+        <div class="court-seal-icon">
+          <svg width="34" height="34"><use href="#icon-scales"></use></svg>
+        </div>
+      </div>
+      <h1>DIGITAL COURT</h1>
+      <p class="login-subtitle">National e-Judiciary & Case Workflow System</p>
 
-        <form id="loginForm">
-            <label>Username</label>
-            <input type="text" id="username" placeholder="Enter username" required>
+      <!-- Quick Role Login Helper for Reviewers -->
+      <div class="quick-login-section">
+        <div class="quick-login-title">
+          <svg width="14" height="14"><use href="#icon-gavel"></use></svg>
+          Quick Prototype Access (Click to autofill)
+        </div>
+        <div class="quick-role-buttons">
+          <button type="button" class="quick-role-btn" onclick="fillLogin('judge', 'judge123', 'Judge')">
+            <span>⚖️ Judge</span>
+            <small style="color:var(--slate-400)">Presiding Bench</small>
+          </button>
+          <button type="button" class="quick-role-btn" onclick="fillLogin('lawyer', 'lawyer123', 'Lawyer')">
+            <span>💼 Lawyer</span>
+            <small style="color:var(--slate-400)">Counsel</small>
+          </button>
+          <button type="button" class="quick-role-btn" onclick="fillLogin('litigant', 'litigant123', 'Litigant')">
+            <span>👤 Litigant</span>
+            <small style="color:var(--slate-400)">Citizen</small>
+          </button>
+          <button type="button" class="quick-role-btn" onclick="fillLogin('admin', 'admin123', 'Admin')">
+            <span>🏛️ Admin</span>
+            <small style="color:var(--slate-400)">Registrar</small>
+          </button>
+          <button type="button" class="quick-role-btn" onclick="fillLogin('clerk', 'clerk123', 'Clerk')">
+            <span>📋 Clerk</span>
+            <small style="color:var(--slate-400)">Steno/Bench</small>
+          </button>
+        </div>
+      </div>
 
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter password" required>
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="username">Username or CNR Identity</label>
+          <div class="input-icon-wrapper">
+            <span class="input-icon">
+              <svg width="16" height="16"><use href="#icon-docket"></use></svg>
+            </span>
+            <input type="text" id="username" class="form-control" placeholder="Enter username (e.g. admin)" required value="admin">
+          </div>
+        </div>
 
-            <button type="submit">Login</button>
+        <div class="form-group">
+          <label class="form-label" for="password">Security Password</label>
+          <div class="input-icon-wrapper">
+            <span class="input-icon">
+              <svg width="16" height="16"><use href="#icon-orders"></use></svg>
+            </span>
+            <input type="password" id="password" class="form-control" placeholder="Enter password" required value="admin123">
+          </div>
+        </div>
 
-            <p id="loginMessage"></p>
-        </form>
+        <button type="submit" class="btn-primary" style="margin-top: 10px;">
+          <svg width="18" height="18"><use href="#icon-scales"></use></svg>
+          Secure Judicial Login
+        </button>
+
+        <p id="loginMessage"></p>
+      </form>
+
+      <div class="login-notice">
+        <span>🔒 256-bit Encrypted Judicial Session | e-Courts Certified</span>
+      </div>
     </div>
+  </div>
 
-</div>
+  <!-- ==========================================================================
+       MAIN APPLICATION SHELL
+       ========================================================================== -->
+  <div id="dashboardPage" class="app-container hidden">
 
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <svg width="22" height="22"><use href="#icon-scales"></use></svg>
+        </div>
+        <div class="sidebar-logo-text">
+          <h2>e-COURT PORTAL</h2>
+          <span>Digital Judiciary</span>
+        </div>
+      </div>
 
-<!-- Main Application -->
-<div id="dashboardPage" class="hidden">
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Judicial Operations</div>
+        
+        <a class="sidebar-link active" onclick="showSection('dashboard')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-dashboard"></use></svg>
+            <span>Dashboard</span>
+          </div>
+        </a>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
+        <a class="sidebar-link" onclick="showSection('cases')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-docket"></use></svg>
+            <span>Case Docket</span>
+          </div>
+          <span class="nav-badge" id="navCaseCount">0</span>
+        </a>
 
-        <div class="logo">
-            Digital Court
+        <a class="sidebar-link" onclick="showSection('addCase')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-file-plus"></use></svg>
+            <span>e-Filing Portal</span>
+          </div>
+          <span class="nav-badge" style="background-color: var(--court-gold-600);">New</span>
+        </a>
+
+        <a class="sidebar-link" onclick="showSection('causeList')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-calendar"></use></svg>
+            <span>Daily Cause List</span>
+          </div>
+          <span class="nav-badge" id="navCauseCount">0</span>
+        </a>
+
+        <a class="sidebar-link" onclick="showSection('virtualCourt')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-video"></use></svg>
+            <span>Virtual Courtroom</span>
+          </div>
+          <span class="nav-badge live">LIVE</span>
+        </a>
+
+        <div class="nav-section-label">Judicial Records</div>
+
+        <a class="sidebar-link" onclick="showSection('judgments')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-orders"></use></svg>
+            <span>Orders & Judgments</span>
+          </div>
+        </a>
+
+        <a class="sidebar-link" onclick="showSection('notices')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-mail"></use></svg>
+            <span>e-Summons / Notice</span>
+          </div>
+        </a>
+
+        <a class="sidebar-link" onclick="showSection('precedents')">
+          <div class="sidebar-link-content">
+            <svg><use href="#icon-book"></use></svg>
+            <span>Legal Precedents</span>
+          </div>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="system-status-pill">
+          <div class="status-dot"></div>
+          <span>Digital Core Active (v2.5)</span>
+        </div>
+        <div class="sidebar-quick-links">
+          <button class="btn-sidebar-secondary" onclick="resetPrototypeData()" title="Reload fresh demo cases">
+            Reset Data
+          </button>
+          <button class="btn-sidebar-secondary" onclick="openHelpModal()" title="View quick guide">
+            System Guide
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="navbar-left">
+          <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle Navigation">
+            <svg width="22" height="22"><use href="#icon-dashboard"></use></svg>
+          </button>
+
+          <!-- Live Date / Clock & Session Indicator -->
+          <div class="court-live-clock">
+            <svg width="15" height="15"><use href="#icon-clock"></use></svg>
+            <span id="liveClockDisplay">Loading clock...</span>
+            <span class="session-indicator">● Court In Session</span>
+          </div>
         </div>
 
-        <div class="nav-links">
-            <a href="#" onclick="showSection('dashboard')">Dashboard</a>
-            <a href="#" onclick="showSection('cases')">Cases</a>
-            <a href="#" onclick="showSection('addCase')">Add Case</a>
-            <button onclick="logout()">Logout</button>
+        <!-- Global Search Bar -->
+        <div class="navbar-search">
+          <span class="search-icon">
+            <svg width="15" height="15"><use href="#icon-search"></use></svg>
+          </span>
+          <input type="text" id="globalSearchInput" placeholder="Quick find CNR, Case No, or Judge..." oninput="handleGlobalSearch(this.value)">
         </div>
 
-    </nav>
+        <div class="navbar-right">
+          <!-- Quick Action: File New Case -->
+          <button class="btn-header-action" onclick="showSection('addCase')">
+            <svg width="15" height="15"><use href="#icon-file-plus"></use></svg>
+            <span>+ e-Filing</span>
+          </button>
 
+          <!-- Notifications Bell -->
+          <div class="notification-wrapper">
+            <button class="icon-button" onclick="toggleNotifications()" aria-label="Notifications">
+              <svg width="18" height="18"><use href="#icon-bell"></use></svg>
+              <span class="notification-badge" id="notificationCount">3</span>
+            </button>
 
-    <main>
-
-        <!-- Dashboard -->
-        <section id="dashboard" class="section">
-
-            <h2>Dashboard</h2>
-            <p>Welcome to the Digital Court Management System.</p>
-
-            <div class="cards">
-
-                <div class="card">
-                    <h3>Total Cases</h3>
-                    <p id="totalCases">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Pending Cases</h3>
-                    <p id="pendingCases">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Completed Cases</h3>
-                    <p id="completedCases">0</p>
-                </div>
-
+            <!-- Notifications Dropdown -->
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-dropdown-header">
+                <span>Court Notifications & Alerts</span>
+                <span style="font-size: 11px; cursor: pointer; color: var(--court-gold-400);" onclick="markNotificationsRead()">Mark all read</span>
+              </div>
+              <div class="notification-dropdown-body" id="notificationList">
+                <!-- Dynamically populated -->
+              </div>
             </div>
+          </div>
 
+          <!-- User Profile & Role Switcher -->
+          <div class="user-profile-menu">
+            <div class="user-avatar" id="userAvatarText">AD</div>
+            <div class="user-meta">
+              <span class="user-name" id="userNameDisplay">Registrar General</span>
+              <select class="user-role-select" id="roleSelector" onchange="switchUserRole(this.value)">
+                <option value="Judge">Hon'ble Judge</option>
+                <option value="Lawyer">Lawyer / Counsel</option>
+                <option value="Litigant">Litigant / Citizen</option>
+                <option value="Admin">Court Administrator</option>
+                <option value="Clerk">Court Clerk / Steno</option>
+              </select>
+            </div>
+            <button class="btn-logout" onclick="logout()" title="Sign Out">
+              <svg width="18" height="18"><use href="#icon-logout"></use></svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN PAGE CONTENT (Dynamic Sections) -->
+      <main class="main-content">
+
+        <!-- ==================================================================
+             SECTION 1: DASHBOARD
+             ================================================================== -->
+        <!-- ==================================================================
+             SECTION 1: DASHBOARD (DYNAMIC PER ROLE: Judge, Lawyer, Litigant, Admin, Clerk)
+             ================================================================== -->
+        <section id="dashboard" class="section">
+          <!-- Urgent Court Notice Ticker -->
+          <div class="court-alert-banner">
+            <div class="court-alert-content">
+              <span class="court-alert-badge" id="roleAlertBadge">Live Roster</span>
+              <span id="roleAlertText"><strong>High Court System Online:</strong> 12 benches active today. Digital case filing & e-Challan payment gateway operational.</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn-table-action" style="background: rgba(255,255,255,0.15); color: #fff; border:none;" onclick="showSection('causeList')">
+                View Cause List
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Role Dashboard Container -->
+          <div id="roleDashboardContainer">
+            <!-- Dynamically populated based on active role via script.js -->
+          </div>
         </section>
 
-
-        <!-- Cases Section -->
+        <!-- ==================================================================
+             SECTION 2: CASES DOCKET / CASE MANAGEMENT
+             ================================================================== -->
         <section id="cases" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Judicial Case Docket & Master Registry</h2>
+              <p>Comprehensive repository of active lawsuits, writ petitions, and criminal revisions.</p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn-table-action" onclick="exportCasesCSV()">
+                <svg width="14" height="14"><use href="#icon-docket"></use></svg>
+                Export CSV
+              </button>
+              <button class="btn-header-action" onclick="showSection('addCase')">
+                <svg width="14" height="14"><use href="#icon-file-plus"></use></svg>
+                + Register Case
+              </button>
+            </div>
+          </div>
 
-            <h2>Case Management</h2>
-
-            <input
-                type="text"
-                id="searchCase"
-                placeholder="Search by case number or case title..."
-                onkeyup="searchCases()"
-            >
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Case No.</th>
-                        <th>Case Title</th>
-                        <th>Judge</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody id="caseTableBody">
-                </tbody>
-
-            </table>
-
-        </section>
-
-
-        <!-- Add Case Section -->
-        <section id="addCase" class="section hidden">
-
-            <h2>Register New Case</h2>
-
-            <form id="caseForm" class="case-form">
-
-                <label>Case Number</label>
+          <!-- Filter Toolbar -->
+          <div class="filter-toolbar">
+            <div class="filter-row-top">
+              <div class="search-input-group">
+                <svg width="16" height="16"><use href="#icon-search"></use></svg>
                 <input
-                    type="text"
-                    id="caseNumber"
-                    placeholder="Example: DC-104"
-                    required
+                  type="text"
+                  id="searchCase"
+                  placeholder="Search by CNR, Case Title, Judge, or Advocate..."
+                  oninput="filterCases()"
                 >
+              </div>
 
-                <label>Case Title</label>
-                <input
-                    type="text"
-                    id="caseTitle"
-                    placeholder="Enter case title"
-                    required
-                >
-
-                <label>Judge Name</label>
-                <input
-                    type="text"
-                    id="judgeName"
-                    placeholder="Enter judge name"
-                    required
-                >
-
-                <label>Hearing Date</label>
-                <input
-                    type="date"
-                    id="hearingDate"
-                    required
-                >
-
-                <label>Case Status</label>
-
-                <select id="caseStatus">
-                    <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
+              <div class="filter-controls">
+                <select class="custom-select" id="filterCategory" onchange="filterCases()">
+                  <option value="All">All Categories</option>
+                  <option value="Commercial">Commercial Law</option>
+                  <option value="Criminal">Criminal Law</option>
+                  <option value="Constitutional">Constitutional / Writ</option>
+                  <option value="Civil">Civil Dispute</option>
+                  <option value="Cyber">Cyber & IPR</option>
+                  <option value="Family">Family Law</option>
                 </select>
 
-                <button type="submit">Add Case</button>
+                <select class="custom-select" id="filterJudge" onchange="filterCases()">
+                  <option value="All">All Benches / Judges</option>
+                  <!-- Dynamically populated -->
+                </select>
 
-            </form>
+                <select class="custom-select" id="filterPriority" onchange="filterCases()">
+                  <option value="All">All Priorities</option>
+                  <option value="Urgent">Urgent Motions</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Fast-Track">Fast-Track</option>
+                </select>
 
-            <p id="caseMessage"></p>
+                <button class="btn-table-action" onclick="resetFilters()">
+                  Clear Filters
+                </button>
+              </div>
+            </div>
 
+            <!-- Status Filter Chips -->
+            <div class="status-chips-row">
+              <span class="chip-label">Status Filter:</span>
+              <button class="filter-chip active" data-status="All" onclick="setStatusFilter('All', this)">All Cases</button>
+              <button class="filter-chip" data-status="Pending" onclick="setStatusFilter('Pending', this)">Pending</button>
+              <button class="filter-chip" data-status="Under Trial" onclick="setStatusFilter('Under Trial', this)">Under Trial</button>
+              <button class="filter-chip" data-status="Reserved for Judgment" onclick="setStatusFilter('Reserved for Judgment', this)">Order Reserved</button>
+              <button class="filter-chip" data-status="Completed" onclick="setStatusFilter('Completed', this)">Disposed</button>
+            </div>
+          </div>
+
+          <!-- Master Docket Table -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="court-table">
+                <thead>
+                  <tr>
+                    <th>Case No & CNR</th>
+                    <th>Case Title & Parties</th>
+                    <th>Category</th>
+                    <th>Assigned Bench</th>
+                    <th>Next Hearing</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="caseTableBody">
+                  <!-- Dynamically rendered -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-footer">
+              <span id="caseTableCountInfo">Showing 0 cases</span>
+              <span style="font-style: italic;">e-Courts Registry Protocol 102 compliant</span>
+            </div>
+          </div>
         </section>
 
-    </main>
+        <!-- ==================================================================
+             SECTION 3: E-FILING PORTAL / REGISTER NEW CASE
+             ================================================================== -->
+        <section id="addCase" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Electronic Case Filing Portal (e-Filing)</h2>
+              <p>Submit new original suits, writ petitions, and interlocutory applications with verified digital signatures.</p>
+            </div>
+            <button class="btn-table-action" onclick="showSection('cases')">
+              ← Back to Case Docket
+            </button>
+          </div>
 
-</div>
+          <div class="efiling-layout">
+            <!-- Form Card -->
+            <div class="form-card">
+              <form id="caseForm" onsubmit="handleCaseSubmit(event)">
+                
+                <!-- Section A: Case Classification -->
+                <div class="form-section-divider">Part A: Case Classification & Bench</div>
+                <div class="form-grid-3col">
+                  <div class="form-group">
+                    <label class="form-label">Case Identifier</label>
+                    <input type="text" id="caseNumber" class="form-control" placeholder="e.g. DC/2026/0109" required>
+                  </div>
 
-<script src="script.js"></script>
+                  <div class="form-group">
+                    <label class="form-label">Case Category</label>
+                    <select id="caseCategory" class="custom-select" style="width:100%;" required>
+                      <option value="Commercial">Commercial Dispute</option>
+                      <option value="Criminal">Criminal Petition / Bail</option>
+                      <option value="Constitutional">Constitutional / Writ</option>
+                      <option value="Civil">Civil Suit</option>
+                      <option value="Cyber">Cyber & Intellectual Property</option>
+                      <option value="Family">Family / Matrimonial</option>
+                    </select>
+                  </div>
 
+                  <div class="form-group">
+                    <label class="form-label">Hearing Urgency / Priority</label>
+                    <select id="casePriority" class="custom-select" style="width:100%;" required>
+                      <option value="Regular">Regular Hearing</option>
+                      <option value="Urgent">Urgent Motion (Within 48h)</option>
+                      <option value="Fast-Track">Fast-Track Division</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Case Title / Matter Subject</label>
+                  <input type="text" id="caseTitle" class="form-control" placeholder="e.g. Apex Biotech Corp vs. Union Health Authority" required oninput="updateFilingPreview()">
+                </div>
+
+                <div class="form-grid-2col">
+                  <div class="form-group">
+                    <label class="form-label">Presiding Judge / Bench</label>
+                    <input type="text" id="judgeName" class="form-control" placeholder="e.g. Hon'ble Justice Rajesh Sharma" required oninput="updateFilingPreview()">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Courtroom Assignment</label>
+                    <select id="caseCourtroom" class="custom-select" style="width:100%;" required>
+                      <option value="Courtroom 01 (Chief Justice Bench)">Courtroom 01 (Chief Justice Bench)</option>
+                      <option value="Courtroom 02 (Writ & Constitutional)">Courtroom 02 (Writ & Constitutional)</option>
+                      <option value="Courtroom 03 (Criminal & Bail)">Courtroom 03 (Criminal & Bail)</option>
+                      <option value="Courtroom 04 (Commercial Bench)">Courtroom 04 (Commercial Bench)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Section B: Litigant & Counsel Information -->
+                <div class="form-section-divider">Part B: Litigants & Legal Counsels</div>
+                <div class="form-grid-2col">
+                  <div class="form-group">
+                    <label class="form-label">Petitioner / Plaintiff Name</label>
+                    <input type="text" id="petitionerName" class="form-control" placeholder="Enter Petitioner Name" required oninput="updateFilingPreview()">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Petitioner Lead Counsel</label>
+                    <input type="text" id="petitionerAdvocate" class="form-control" placeholder="Advocate Name & Bar ID" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Respondent / Defendant Name</label>
+                    <input type="text" id="respondentName" class="form-control" placeholder="Enter Respondent Name" required oninput="updateFilingPreview()">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Respondent Counsel (if known)</label>
+                    <input type="text" id="respondentAdvocate" class="form-control" placeholder="Advocate Name / State Counsel" value="To be entered upon appearance">
+                  </div>
+                </div>
+
+                <!-- Section C: Hearing & Proceedings -->
+                <div class="form-section-divider">Part C: Listing & Hearing Details</div>
+                <div class="form-grid-3col">
+                  <div class="form-group">
+                    <label class="form-label">Listing Date</label>
+                    <input type="date" id="hearingDate" class="form-control" required oninput="updateFilingPreview()">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Time Slot</label>
+                    <select id="hearingTimeSlot" class="custom-select" style="width:100%;" required>
+                      <option value="10:30 AM">10:30 AM (Morning Session)</option>
+                      <option value="11:45 AM">11:45 AM (Pre-Lunch)</option>
+                      <option value="02:15 PM">02:15 PM (Afternoon Session)</option>
+                      <option value="03:30 PM">03:30 PM (Final Arguments)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Initial Docket Status</label>
+                    <select id="caseStatus" class="custom-select" style="width:100%;">
+                      <option value="Pending">Pending (Fresh Listing)</option>
+                      <option value="Under Trial">Under Trial</option>
+                      <option value="Completed">Completed / Disposed</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Section D: Case Summary & Relief -->
+                <div class="form-section-divider">Part D: Case Summary & Prayer (Relief Sought)</div>
+                <div class="form-group">
+                  <label class="form-label">Brief Statement of Claim / Ground of Petition</label>
+                  <textarea id="caseDescription" class="form-control" placeholder="State facts constituting the dispute..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Prayer / Operative Relief Sought</label>
+                  <textarea id="casePrayer" class="form-control" placeholder="Relief prayed before the Hon'ble Court..."></textarea>
+                </div>
+
+                <!-- Section E: Electronic Document Vault -->
+                <div class="form-section-divider">Part E: Digital Pleadings & Exhibits (PDF)</div>
+                <div class="doc-upload-box" onclick="simulateFileUpload()">
+                  <svg width="28" height="28" style="color:var(--court-navy-600);"><use href="#icon-file-plus"></use></svg>
+                  <p style="margin: 8px 0 4px; font-weight:600; color:var(--court-navy-900);">Click to Attach Petition / Vakalatnama / Evidence Files</p>
+                  <span style="font-size:11px; color:var(--slate-400);">Simulated digital vault supporting PDF format with automated sha256 checksum</span>
+                </div>
+                <div class="uploaded-docs-list" id="uploadedDocsList">
+                  <div class="uploaded-doc-chip">
+                    <div class="doc-chip-left">
+                      <svg width="14" height="14" style="color:var(--accent-emerald);"><use href="#icon-check"></use></svg>
+                      <span>Main Plaint with Affidavit.pdf</span>
+                    </div>
+                    <span style="color:var(--slate-400); font-size:11px;">2.4 MB (Verified)</span>
+                  </div>
+                  <div class="uploaded-doc-chip">
+                    <div class="doc-chip-left">
+                      <svg width="14" height="14" style="color:var(--accent-emerald);"><use href="#icon-check"></use></svg>
+                      <span>Vakalatnama & Memo of Appearance.pdf</span>
+                    </div>
+                    <span style="color:var(--slate-400); font-size:11px;">840 KB (Verified)</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 28px; display:flex; gap:12px;">
+                  <button type="submit" class="btn-primary" style="flex:1;">
+                    <svg width="18" height="18"><use href="#icon-scales"></use></svg>
+                    Submit & Generate Official e-Filing CNR
+                  </button>
+                  <button type="button" class="btn-table-action" onclick="resetFilingForm()">
+                    Reset Form
+                  </button>
+                </div>
+
+                <p id="caseMessage"></p>
+              </form>
+            </div>
+
+            <!-- Live e-Filing Summary Preview -->
+            <div class="filing-preview-card">
+              <div class="receipt-seal-header">
+                <svg width="28" height="28" style="color:var(--court-gold-500);"><use href="#icon-scales"></use></svg>
+                <h4>FILING RECEIPT PREVIEW</h4>
+                <span>e-Judiciary Registry System</span>
+              </div>
+
+              <div class="preview-row">
+                <span class="preview-label">Case Number:</span>
+                <span class="preview-val" id="prevCaseNo">DC/2026/0109</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Generated CNR:</span>
+                <span class="preview-val" id="prevCNR" style="font-family:monospace;">DLHC01-002109-2026</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Subject Matter:</span>
+                <span class="preview-val" id="prevTitle">Matter Pending Entry</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Petitioner:</span>
+                <span class="preview-val" id="prevPetitioner">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Respondent:</span>
+                <span class="preview-val" id="prevRespondent">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Assigned Bench:</span>
+                <span class="preview-val" id="prevJudge">Hon'ble Justice</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Hearing Date:</span>
+                <span class="preview-val" id="prevDate">Not Scheduled</span>
+              </div>
+
+              <div class="barcode-sim">||| | |||| || ||| ||||</div>
+
+              <div style="text-align:center; font-size:10.5px; color:var(--slate-400);">
+                Receipt auto-generates QR & Barcode verification once submitted.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 4: DAILY CAUSE LIST
+             ================================================================== -->
+        <section id="causeList" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Official Daily Cause List & Court Roster</h2>
+              <p>Chronological schedule of listed matters, stages, and courtroom assignments for the day.</p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn-table-action" onclick="printCauseList()">
+                <svg width="14" height="14"><use href="#icon-printer"></use></svg>
+                Print Cause List
+              </button>
+              <button class="btn-table-action" onclick="toggleKioskMode()">
+                📺 Kiosk Display Mode
+              </button>
+            </div>
+          </div>
+
+          <!-- Cause List Filters -->
+          <div class="cause-list-toolbar">
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <label class="form-label" style="margin:0;">Roster Date:</label>
+              <input type="date" id="causeListDateInput" class="form-control" style="width:170px; padding:6px 12px;" onchange="renderCauseList()">
+              <button class="btn-table-action" onclick="setCauseDateToday()">Today</button>
+              <button class="btn-table-action" onclick="setCauseDateTomorrow()">Tomorrow</button>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+              <label class="form-label" style="margin:0;">Select Courtroom:</label>
+              <select id="causeCourtroomFilter" class="custom-select" onchange="renderCauseList()">
+                <option value="All">All Courtrooms</option>
+                <option value="Courtroom 01">Courtroom 01 (Chief Justice)</option>
+                <option value="Courtroom 02">Courtroom 02 (Constitutional)</option>
+                <option value="Courtroom 03">Courtroom 03 (Criminal)</option>
+                <option value="Courtroom 04">Courtroom 04 (Commercial)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Active Bench Banner -->
+          <div class="bench-info-banner">
+            <div class="bench-title">
+              <h3 id="causeBannerBench">HIGH COURT OF JUDICATURE — DAILY CAUSE LIST</h3>
+              <p id="causeBannerDetails">Showing scheduled matters across division and single benches.</p>
+            </div>
+            <span class="badge" style="background:#22c55e; color:#052e16;">Official Court Publication</span>
+          </div>
+
+          <!-- Cause List Table -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="court-table">
+                <thead>
+                  <tr>
+                    <th>Item #</th>
+                    <th>Case No & CNR</th>
+                    <th>Parties / Litigants</th>
+                    <th>Petitioner Advocate</th>
+                    <th>Respondent Advocate</th>
+                    <th>Stage of Matter</th>
+                    <th>Courtroom</th>
+                    <th>Live Court Status</th>
+                  </tr>
+                </thead>
+                <tbody id="causeListTableBody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 5: VIRTUAL COURTROOM (SIMULATION)
+             ================================================================== -->
+        <section id="virtualCourt" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Virtual Courtroom (Video Hearing System)</h2>
+              <p>Encrypted judicial proceedings with live transcription, evidence display, and call to order.</p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn-table-action" onclick="openOrderModal('DC/2026/0101')">
+                <svg width="14" height="14"><use href="#icon-orders"></use></svg>
+                Dictate Live Order
+              </button>
+            </div>
+          </div>
+
+          <div class="virtual-court-container">
+            <!-- Top VC Bar -->
+            <div class="vc-header">
+              <div class="vc-court-info">
+                <span class="vc-live-indicator">
+                  <span class="vc-rec-dot"></span>
+                  HEARING IN PROGRESS
+                </span>
+                <div>
+                  <strong style="font-size:13.5px;" id="vcHearingCaseTitle">DC/2026/0101: A.K. Infrastructure Ltd. vs. State Urban Development</strong>
+                  <div style="font-size:11px; color:var(--slate-400);">Courtroom 04 (Commercial Bench) • Hon'ble Justice Rajesh Sharma presiding</div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="vc-timer" id="vcTimerDisplay">00:18:42</div>
+                <button class="btn-table-action" style="background:rgba(255,255,255,0.1); color:#fff; border:none;" onclick="openCaseDossier('DC/2026/0101')">
+                  View Case Dossier
+                </button>
+              </div>
+            </div>
+
+            <!-- 4-Grid Video Display -->
+            <div class="vc-grid">
+              <!-- Tile 1: Judge -->
+              <div class="vc-video-tile judge-bench speaking" id="tileJudge">
+                <div class="vc-avatar-large" style="border-color: var(--court-gold-400);">
+                  ⚖️
+                </div>
+                <div class="vc-user-tag">
+                  <span>Hon'ble Justice Rajesh Sharma (Presiding)</span>
+                </div>
+                <div class="vc-mic-status" style="color: #22c55e;">
+                  <svg width="16" height="16"><use href="#icon-mic"></use></svg>
+                </div>
+              </div>
+
+              <!-- Tile 2: Petitioner Counsel -->
+              <div class="vc-video-tile" id="tilePetitioner">
+                <div class="vc-avatar-large">
+                  👨‍⚖️
+                </div>
+                <div class="vc-user-tag">
+                  <span>Adv. Raghavan Nair (Counsel for Petitioner)</span>
+                </div>
+                <div class="vc-mic-status" style="color: #22c55e;">
+                  <svg width="16" height="16"><use href="#icon-mic"></use></svg>
+                </div>
+              </div>
+
+              <!-- Tile 3: Respondent Counsel -->
+              <div class="vc-video-tile" id="tileRespondent">
+                <div class="vc-avatar-large">
+                  👩‍⚖️
+                </div>
+                <div class="vc-user-tag">
+                  <span>Adv. Sunita Deshmukh (Counsel for State)</span>
+                </div>
+                <div class="vc-mic-status" style="color: var(--slate-400);">
+                  <svg width="16" height="16"><use href="#icon-mic"></use></svg>
+                </div>
+              </div>
+
+              <!-- Tile 4: Court Stenographer / Clerk -->
+              <div class="vc-video-tile" id="tileClerk">
+                <div class="vc-avatar-large">
+                  🏛️
+                </div>
+                <div class="vc-user-tag">
+                  <span>Court Registrar & Stenographer (Recording)</span>
+                </div>
+                <div class="vc-mic-status" style="color: #22c55e;">
+                  <svg width="16" height="16"><use href="#icon-mic"></use></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Speech Transcription Feed -->
+            <div class="vc-transcript-bar">
+              <span class="transcript-speaker" id="transcriptSpeaker">Justice Sharma:</span>
+              <span class="transcript-text" id="transcriptText">"Counsel for the petitioner may proceed to summarize clause 14.2 of the concession agreement."</span>
+            </div>
+
+            <!-- Bottom Video Controls -->
+            <div class="vc-controls-bar">
+              <div style="font-size:12px; color:var(--slate-400);">
+                Active Participants: 4 | Stream Quality: 1080p HD
+              </div>
+
+              <div class="vc-controls-center">
+                <button class="vc-btn active" id="btnVcMic" onclick="toggleVcMic()" title="Mute/Unmute Mic">
+                  <svg width="18" height="18"><use href="#icon-mic"></use></svg>
+                </button>
+                <button class="vc-btn active" id="btnVcCam" onclick="toggleVcCam()" title="Camera On/Off">
+                  <svg width="18" height="18"><use href="#icon-video"></use></svg>
+                </button>
+                <button class="vc-btn" onclick="showToast('Displaying Exhibit A: Concession Agreement on screens', 'info')" title="Share Screen / Evidence">
+                  <svg width="18" height="18"><use href="#icon-orders"></use></svg>
+                </button>
+                <button class="vc-btn gavel-btn" onclick="strikeVirtualGavel()" title="Strike Gavel / Call To Order">
+                  <svg width="18" height="18"><use href="#icon-gavel"></use></svg>
+                  <span>Strike Gavel</span>
+                </button>
+                <button class="vc-btn end-btn" onclick="showSection('dashboard')" title="Leave Hearing Room">
+                  <svg width="18" height="18"><use href="#icon-close"></use></svg>
+                </button>
+              </div>
+
+              <button class="btn-table-action" style="background: rgba(255,255,255,0.1); color:#fff; border:none;" onclick="triggerNextTranscript()">
+                Simulate Next Argument →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 6: ORDERS & JUDGMENTS REPOSITORY
+             ================================================================== -->
+        <section id="judgments" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Orders, Pronouncements & Judicial Repository</h2>
+              <p>Digitally signed court orders, interim injunctions, and certified judgment decrees.</p>
+            </div>
+            <div class="header-action-group">
+              <button class="btn-header-action" onclick="openOrderModal(null)">
+                <svg width="14" height="14"><use href="#icon-orders"></use></svg>
+                + Issue New Order
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-toolbar">
+            <div class="filter-row-top">
+              <div class="search-input-group">
+                <svg width="16" height="16"><use href="#icon-search"></use></svg>
+                <input type="text" id="searchJudgments" placeholder="Search orders by case number, bench, or keyword..." oninput="filterJudgments(this.value)">
+              </div>
+              <div class="filter-controls">
+                <select class="custom-select" id="judgmentTypeFilter" onchange="filterJudgments(document.getElementById('searchJudgments').value)">
+                  <option value="All">All Dispositions</option>
+                  <option value="Interim Relief">Interim Relief Granted</option>
+                  <option value="Bail Granted">Bail Order</option>
+                  <option value="Disposed">Final Judgment</option>
+                  <option value="Dismissed">Petition Dismissed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="orders-grid" id="ordersGrid">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 7: E-SUMMONS & NOTICES GENERATOR
+             ================================================================== -->
+        <section id="notices" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>e-Summons & Judicial Notice Dispatch</h2>
+              <p>Generate authenticated electronic court summons with QR verification and dispatch audit tracking.</p>
+            </div>
+          </div>
+
+          <div class="efiling-layout">
+            <div class="form-card">
+              <div class="form-section-divider">Generate Official Summons</div>
+              
+              <div class="form-group">
+                <label class="form-label">Select Case from Docket</label>
+                <select id="noticeCaseSelect" class="custom-select" style="width:100%;" onchange="updateNoticePreview()">
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label class="form-label">Notice Recipient / Addressee</label>
+                  <input type="text" id="noticeRecipient" class="form-control" value="State Urban Development Authority" oninput="updateNoticePreview()">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Notice Type</label>
+                  <select id="noticeTypeSelect" class="custom-select" style="width:100%;" onchange="updateNoticePreview()">
+                    <option value="Summons for Settlement of Issues">Summons for Settlement of Issues</option>
+                    <option value="Notice to Show Cause">Notice to Show Cause</option>
+                    <option value="Witness Summons for Evidence">Witness Summons for Evidence</option>
+                    <option value="Urgent Injunction Notice">Urgent Injunction Notice</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2col">
+                <div class="form-group">
+                  <label class="form-label">Mandatory Appearance Date</label>
+                  <input type="date" id="noticeAppearanceDate" class="form-control" value="2026-10-10" oninput="updateNoticePreview()">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Courtroom to Report</label>
+                  <input type="text" id="noticeCourtroom" class="form-control" value="Courtroom 04 (Commercial Bench)" oninput="updateNoticePreview()">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Specific Directions / Summons Text</label>
+                <textarea id="noticeDirections" class="form-control" rows="4" oninput="updateNoticePreview()">Take notice that you are hereby required to appear before this Hon'ble Court in person or by pleader duly instructed, and to file your Written Statement of defense within 30 days from the date of service hereof.</textarea>
+              </div>
+
+              <div style="display:flex; gap:12px; margin-top:20px;">
+                <button type="button" class="btn-primary" onclick="dispatchElectronicSummons()">
+                  <svg width="18" height="18"><use href="#icon-mail"></use></svg>
+                  Dispatch Electronic Summons
+                </button>
+                <button type="button" class="btn-table-action" onclick="printSummonsNotice()">
+                  <svg width="14" height="14"><use href="#icon-printer"></use></svg>
+                  Print Summons
+                </button>
+              </div>
+            </div>
+
+            <!-- Summons Preview Sheet -->
+            <div class="official-order-paper" style="padding:24px; font-size:12px; border-radius:var(--radius-lg); background:#fff;">
+              <div class="court-emblem-watermark" style="padding-bottom:8px; margin-bottom:12px;">
+                <div style="font-size:20px;">⚖️</div>
+                <h3 style="font-size:13px; font-family:var(--font-serif); margin-top:4px;">IN THE COURT OF THE PRINCIPAL JUDGE</h3>
+                <p style="font-size:10px; color:var(--slate-500);">ELECTRONIC PROCESS SERVICE DIVISION</p>
+              </div>
+
+              <div style="text-align:center; font-weight:700; margin-bottom:12px; font-size:12px; text-decoration:underline;" id="previewNoticeType">
+                SUMMONS FOR SETTLEMENT OF ISSUES
+              </div>
+
+              <div style="font-size:11.5px; line-height:1.6;" id="previewNoticeBody">
+                <!-- Dynamically updated -->
+              </div>
+
+              <div class="order-signature-block" style="margin-top:24px;">
+                <div class="digital-signature-seal" style="font-size:10px; padding:6px 10px;">
+                  ✓ Authenticated e-Summons<br>
+                  UID: SUM-2026-9812
+                </div>
+                <div style="text-align:right; font-size:11px;">
+                  <strong>By Order of the Court</strong><br>
+                  <span>Registrar (Judicial)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             SECTION 8: LEGAL PRECEDENTS & CITATIONS
+             ================================================================== -->
+        <section id="precedents" class="section hidden">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h2>Judicial Precedents & Citation Repository</h2>
+              <p>Reference landmark rulings, constitutional bench precedents, and legal ratios for case preparation.</p>
+            </div>
+          </div>
+
+          <div class="navbar-search" style="width:100%; max-width:500px; margin-bottom:20px;">
+            <span class="search-icon"><svg width="15" height="15"><use href="#icon-search"></use></svg></span>
+            <input type="text" id="precedentSearchInput" placeholder="Search precedents by doctrine, principle, or title..." oninput="filterPrecedents(this.value)">
+          </div>
+
+          <div id="precedentsListContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: CASE DOSSIER (Complete Case Record with Tabs)
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="caseDossierModal">
+    <div class="modal-dialog" style="max-width: 860px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="20" height="20" style="color:var(--court-gold-400);"><use href="#icon-scales"></use></svg>
+          <h3 id="dossierCaseNumber">Case Dossier</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('caseDossierModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-tabs">
+          <button class="modal-tab-btn active" onclick="switchDossierTab('tabOverview', this)">Overview & Litigants</button>
+          <button class="modal-tab-btn" onclick="switchDossierTab('tabProceedings', this)">Proceedings Timeline</button>
+          <button class="modal-tab-btn" onclick="switchDossierTab('tabDocuments', this)">Pleadings & Exhibits</button>
+          <button class="modal-tab-btn" onclick="switchDossierTab('tabOrders', this)">Court Orders</button>
+          <button class="modal-tab-btn" onclick="switchDossierTab('tabActions', this)">Bench Actions</button>
+        </div>
+
+        <!-- Tab 1: Overview -->
+        <div id="tabOverview" class="dossier-tab-content">
+          <div style="background:var(--slate-50); padding:16px; border-radius:var(--radius-md); border:1px solid var(--slate-200); margin-bottom:16px;">
+            <h4 style="font-size:15px; margin-bottom:4px;" id="dossierCaseTitle">Matter Title</h4>
+            <div style="display:flex; gap:16px; font-size:12px; color:var(--slate-500); margin-top:4px;">
+              <span>CNR: <strong id="dossierCNR" style="font-family:monospace; color:var(--slate-700);">-</strong></span>
+              <span>Category: <strong id="dossierCategory">-</strong></span>
+              <span>Priority: <span id="dossierPriorityBadge" class="badge badge-regular">-</span></span>
+            </div>
+          </div>
+
+          <div class="form-grid-2col" style="margin-bottom:16px;">
+            <div style="background:#fff; border:1px solid var(--slate-200); padding:14px; border-radius:var(--radius-md);">
+              <span class="stat-label">Petitioner / Plaintiff</span>
+              <p style="font-weight:700; font-size:13.5px; margin:4px 0 2px;" id="dossierPetitioner">-</p>
+              <span style="font-size:12px; color:var(--slate-500);" id="dossierPetAdvocate">Counsel: -</span>
+            </div>
+
+            <div style="background:#fff; border:1px solid var(--slate-200); padding:14px; border-radius:var(--radius-md);">
+              <span class="stat-label">Respondent / Defendant</span>
+              <p style="font-weight:700; font-size:13.5px; margin:4px 0 2px;" id="dossierRespondent">-</p>
+              <span style="font-size:12px; color:var(--slate-500);" id="dossierRespAdvocate">Counsel: -</span>
+            </div>
+          </div>
+
+          <div style="font-size:12.5px; line-height:1.6; margin-bottom:14px;">
+            <strong>Statement of Facts / Claim:</strong>
+            <p id="dossierDescription" style="color:var(--slate-600); margin-top:4px;">-</p>
+          </div>
+
+          <div style="font-size:12.5px; line-height:1.6;">
+            <strong>Prayer & Relief Sought:</strong>
+            <p id="dossierPrayer" style="color:var(--slate-600); margin-top:4px;">-</p>
+          </div>
+        </div>
+
+        <!-- Tab 2: Proceedings Timeline -->
+        <div id="tabProceedings" class="dossier-tab-content hidden">
+          <div class="timeline" id="dossierTimelineContainer">
+            <!-- Timeline elements injected via JS -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Documents Vault -->
+        <div id="tabDocuments" class="dossier-tab-content hidden">
+          <p style="font-size:12.5px; color:var(--slate-500); margin-bottom:12px;">Authenticated documents submitted by parties in compliance with e-Filing rules.</p>
+          <div class="uploaded-docs-list" id="dossierDocumentsList">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Tab 4: Orders Passed -->
+        <div id="tabOrders" class="dossier-tab-content hidden">
+          <div id="dossierOrdersList">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Tab 5: Bench Actions -->
+        <div id="tabActions" class="dossier-tab-content hidden">
+          <div style="background:var(--slate-50); padding:16px; border-radius:var(--radius-md); border:1px solid var(--slate-200);">
+            <h4 style="font-size:14px; margin-bottom:12px;">Adjourn / Update Listing Date</h4>
+            <div class="form-grid-2col">
+              <div class="form-group">
+                <label class="form-label">Next Hearing Date</label>
+                <input type="date" id="dossierNextDate" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Update Case Status</label>
+                <select id="dossierStatusSelect" class="custom-select" style="width:100%;">
+                  <option value="Pending">Pending</option>
+                  <option value="Under Trial">Under Trial</option>
+                  <option value="Reserved for Judgment">Reserved for Judgment</option>
+                  <option value="Completed">Completed / Disposed</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn-primary" style="margin-top:10px;" onclick="saveDossierCaseChanges()">
+              Save Bench Decisions
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-table-action" onclick="printDossier()">
+          <svg width="14" height="14"><use href="#icon-printer"></use></svg>
+          Print Case Dossier
+        </button>
+        <button class="btn-primary" style="width:auto;" onclick="closeModal('caseDossierModal')">
+          Close Dossier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: OFFICIAL ORDER SHEET (Printable Legal Document)
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="officialOrderModal">
+    <div class="modal-dialog" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3>Official Court Order Sheet</h3>
+        <button class="modal-close-btn" onclick="closeModal('officialOrderModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="background:var(--slate-100);">
+        <div class="official-order-paper" id="printableOrderPaper">
+          <div class="court-emblem-watermark">
+            <svg width="40" height="40" style="margin-bottom:6px;"><use href="#icon-scales"></use></svg>
+            <h2>HIGH COURT OF JUDICATURE</h2>
+            <p>APPELLATE & ORIGINAL SPECIAL JURISDICTION</p>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:12px;">
+            <span><strong>Order ID:</strong> <span id="paperOrderId">ORD-2026-881</span></span>
+            <span><strong>Date of Order:</strong> <span id="paperOrderDate">2026-10-06</span></span>
+          </div>
+
+          <div style="font-weight:700; margin-bottom:4px; font-size:13px;" id="paperBenchName">
+            CORAM: HON'BLE JUSTICE RAJESH SHARMA
+          </div>
+
+          <div class="order-parties">
+            <div style="font-weight:700;" id="paperCaseNumber">Case No: DC/2026/0101</div>
+            <div id="paperCaseParties" style="margin-top:4px;">A.K. Infrastructure Ltd. — Petitioner<br>VERSUS<br>State Urban Development Authority — Respondent</div>
+          </div>
+
+          <div class="order-text-content" id="paperOrderContent">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="order-signature-block">
+            <div class="digital-signature-seal">
+              ✓ Digitally Signed & Certified<br>
+              e-Courts High Authority PKI<br>
+              TimeStamp: 2026-10-06 11:30:14 IST
+            </div>
+            <div style="text-align:right;">
+              <strong id="paperJudgeSig">Justice Rajesh Sharma</strong><br>
+              <span>Judge, High Court</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-table-action" onclick="window.print()">
+          <svg width="14" height="14"><use href="#icon-printer"></use></svg>
+          Print Certified Order Sheet
+        </button>
+        <button class="btn-primary" style="width:auto;" onclick="closeModal('officialOrderModal')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: DRAFT / ISSUE NEW COURT ORDER
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="draftOrderModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Dictate / Record Court Order</h3>
+        <button class="modal-close-btn" onclick="closeModal('draftOrderModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="draftOrderForm" onsubmit="handleOrderSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Target Case</label>
+            <select id="draftOrderCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Order Type / Category</label>
+              <select id="draftOrderType" class="custom-select" style="width:100%;" required>
+                <option value="Interim Directions">Interim Directions / Injunction</option>
+                <option value="Bail Granted">Bail Granted / Released</option>
+                <option value="Notice Issued">Notice Issued to Respondents</option>
+                <option value="Adjournment">Adjournment with Costs</option>
+                <option value="Final Judgment - Allowed">Final Judgment (Suit Allowed)</option>
+                <option value="Final Judgment - Dismissed">Final Judgment (Suit Dismissed)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Presiding Bench</label>
+              <input type="text" id="draftOrderBench" class="form-control" value="Hon'ble Justice Rajesh Sharma" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Operative Order Directions / Dictation</label>
+            <textarea id="draftOrderText" class="form-control" rows="6" placeholder="Enter operative court directions, findings, and compliance deadlines..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Sign & Publish Judicial Order
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: FILING RECEIPT CONFIRMATION
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="receiptModal">
+    <div class="modal-dialog" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3>e-Filing Acknowledgment</h3>
+        <button class="modal-close-btn" onclick="closeModal('receiptModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align:center; padding:12px;">
+          <div style="width:54px; height:54px; border-radius:50%; background:var(--accent-emerald-light); color:var(--accent-emerald); display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px;">
+            <svg width="30" height="30"><use href="#icon-check"></use></svg>
+          </div>
+          <h4 style="font-size:17px; margin-bottom:4px;">Petition Registered Successfully!</h4>
+          <p style="font-size:12.5px; color:var(--slate-500);">An official e-Court CNR record has been minted and listed on the master docket.</p>
+        </div>
+
+        <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:16px; margin:16px 0;">
+          <div class="preview-row">
+            <span class="preview-label">Case Number:</span>
+            <strong id="receiptModalCaseNo">-</strong>
+          </div>
+          <div class="preview-row">
+            <span class="preview-label">CNR Number:</span>
+            <strong id="receiptModalCNR" style="font-family:monospace; color:var(--court-navy-800);">-</strong>
+          </div>
+          <div class="preview-row">
+            <span class="preview-label">Assigned Bench:</span>
+            <span id="receiptModalBench">-</span>
+          </div>
+          <div class="preview-row">
+            <span class="preview-label">Next Hearing:</span>
+            <span id="receiptModalDate">-</span>
+          </div>
+        </div>
+
+        <div class="barcode-sim">||| |||| | ||| |||| | ||</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="closeModal('receiptModal'); showSection('cases');">
+          View in Master Docket →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: SYSTEM HELP & PROTOTYPE OVERVIEW
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="helpModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Digital Court Management System — Prototype Guide</h3>
+        <button class="modal-close-btn" onclick="closeModal('helpModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body" style="font-size:13px; line-height:1.7; color:var(--slate-700);">
+        <p><strong>Welcome to the Digital Court System Prototype!</strong> This application simulates a full-featured e-Judiciary and court management workflow without requiring an external database (using local browser memory & persistence).</p>
+        
+        <h4 style="margin: 16px 0 6px; color:var(--court-navy-950);">Key Features Implemented:</h4>
+        <ul style="padding-left: 20px; display:flex; flex-direction:column; gap:6px;">
+          <li><strong>Role Simulation:</strong> Switch between Court Registrar (Admin), Presiding Judge, and Senior Counsel from the top right profile.</li>
+          <li><strong>Master Case Docket:</strong> Search, filter by category/judge/priority/status, view detailed Dossier, update status, and export to CSV.</li>
+          <li><strong>e-Filing Portal:</strong> Complete multi-part electronic case registration with live receipt generation and document vault.</li>
+          <li><strong>Daily Cause List:</strong> Courtroom schedules, active hearings, filter by date, and kiosk display mode.</li>
+          <li><strong>Virtual Courtroom:</strong> Simulated video hearing with animated audio waveforms, live speech-to-text transcriptions, and judicial gavel sound/animation.</li>
+          <li><strong>Orders & Judgments:</strong> Searchable repository of court decisions with printable official order sheets featuring High Court seal and digital signatures.</li>
+          <li><strong>e-Summons Generator:</strong> Instant digital summons generator with official judicial notice layout.</li>
+          <li><strong>Precedents Library:</strong> Landmark citations and legal ratios quick lookup.</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" style="width:auto;" onclick="closeModal('helpModal')">
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: LITIGANT COURT FEE PAYMENT
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="feePaymentModal">
+    <div class="modal-dialog" style="max-width: 650px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" style="color:var(--court-gold-400);"><use href="#icon-scales"></use></svg>
+          <h3>e-Court Judicial Fee & Challan Payment Gateway</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('feePaymentModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="feePaymentForm" onsubmit="handleFeePaymentSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Select Case for Payment</label>
+            <select id="feeCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Fee Assessment Category</label>
+              <select id="feeCategorySelect" class="custom-select" style="width:100%;" onchange="updateFeeAmount(this.value)">
+                <option value="Plaint Filing & Ad Valorem Court Fee">Plaint Filing & Ad Valorem Court Fee (₹2,500)</option>
+                <option value="Process Service & Summons Notice Fee">Process Service & Summons Notice Fee (₹450)</option>
+                <option value="Certified Judgment Copy Application">Certified Judgment Copy Application (₹250)</option>
+                <option value="Urgent Motion / Vacation Listing Fee">Urgent Motion / Vacation Listing Fee (₹1,000)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Payable Amount</label>
+              <input type="text" id="feeAmountDisplay" class="form-control" value="₹2,500" readonly style="font-weight:700; color:var(--accent-emerald);">
+            </div>
+          </div>
+
+          <label class="form-label">Select Payment Method (Simulated Gateway)</label>
+          <div class="payment-method-selector">
+            <div class="payment-method-tile selected" onclick="selectPaymentMethod(this, 'UPI / QR Code')">
+              <span>📱 UPI (GPay / PhonePe)</span>
+            </div>
+            <div class="payment-method-tile" onclick="selectPaymentMethod(this, 'State Cyber Treasury NetBanking')">
+              <span>🏦 Cyber Treasury NetBanking</span>
+            </div>
+            <div class="payment-method-tile" onclick="selectPaymentMethod(this, 'Debit / Credit Card')">
+              <span>💳 Debit / Credit Card</span>
+            </div>
+            <div class="payment-method-tile" onclick="selectPaymentMethod(this, 'State Bar e-Wallet')">
+              <span>💼 Judicial e-Wallet</span>
+            </div>
+          </div>
+
+          <div class="e-challan-box">
+            <div class="e-challan-row">
+              <span class="text-muted">Government Treasury Head:</span>
+              <strong>0070-60-800-01 (e-Courts Administration)</strong>
+            </div>
+            <div class="e-challan-row">
+              <span class="text-muted">Payer Identity:</span>
+              <strong id="feePayerName">A.K. Infrastructure Ltd.</strong>
+            </div>
+            <div class="e-challan-row">
+              <span class="text-muted">Transaction Type:</span>
+              <span id="selectedPayMethodText">UPI / Instant QR</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:20px; background:linear-gradient(135deg, var(--accent-emerald), #047857);">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Authorize & Pay Court Fee
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: ADMIN REASSIGN BENCH / COURTROOM
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="reassignBenchModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Administrative Bench & Courtroom Reallocation</h3>
+        <button class="modal-close-btn" onclick="closeModal('reassignBenchModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="reassignBenchForm" onsubmit="handleReassignBenchSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Select Case</label>
+            <select id="reassignCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Reassign to Presiding Judge</label>
+              <select id="reassignJudgeSelect" class="custom-select" style="width:100%;" required>
+                <option value="Hon'ble Chief Justice K.G. Chandran">Hon'ble Chief Justice K.G. Chandran</option>
+                <option value="Hon'ble Justice Rajesh Sharma">Hon'ble Justice Rajesh Sharma</option>
+                <option value="Hon'ble Justice Anand Mehta">Hon'ble Justice Anand Mehta</option>
+                <option value="Hon'ble Justice S.K. Patil">Hon'ble Justice S.K. Patil</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Target Courtroom</label>
+              <select id="reassignCourtroomSelect" class="custom-select" style="width:100%;" required>
+                <option value="Courtroom 01 (Chief Justice Bench)">Courtroom 01 (Chief Justice)</option>
+                <option value="Courtroom 02 (Writ & Constitutional)">Courtroom 02 (Constitutional)</option>
+                <option value="Courtroom 03 (Criminal & Bail)">Courtroom 03 (Criminal)</option>
+                <option value="Courtroom 04 (Commercial Bench)">Courtroom 04 (Commercial)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Administrative Reason for Transfer</label>
+            <input type="text" id="reassignReason" class="form-control" placeholder="e.g. Equalization of bench roster / Subject-matter division assignment" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:14px;">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Execute Administrative Reassignment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: ADMIN / CLERK SCRUTINY QUEUE (DEFECT CLEARANCE)
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="scrutinyModal">
+    <div class="modal-dialog" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3>e-Filing Scrutiny & Defect Review</h3>
+        <button class="modal-close-btn" onclick="closeModal('scrutinyModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="scrutinyForm" onsubmit="handleScrutinySubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Select Petition Under Scrutiny</label>
+            <select id="scrutinyCaseSelect" class="custom-select" style="width:100%;" onchange="loadScrutinyDetails(this.value)" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:14px; margin-bottom:16px;">
+            <div style="font-weight:700; font-size:13px;" id="scrutinyCaseTitle">Matter Title</div>
+            <div style="font-size:11.5px; color:var(--slate-500); margin-top:2px;" id="scrutinyCaseLitigants">Parties: -</div>
+            <div style="font-size:11.5px; color:var(--court-navy-700); margin-top:4px;" id="scrutinyDocsCount">Verified Documents: 2 Pleadings submitted</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Scrutiny Determination</label>
+            <select id="scrutinyDecision" class="custom-select" style="width:100%;" onchange="toggleDefectNotes(this.value)">
+              <option value="Approve">✓ Approved (No Defects — Clear for Judicial Listing)</option>
+              <option value="Defects">✕ Defects Noted (Return to Counsel for Rectification)</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden" id="defectNotesContainer">
+            <label class="form-label">Defect Notes / Objections to be Cured</label>
+            <textarea id="defectNotesText" class="form-control" rows="3" placeholder="Specify defects (e.g. Welfare stamp missing on Vakalatnama, Court fee deficit of ₹250)..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:14px;">
+            Submit Scrutiny Decision
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: CLERK STENOGRAPHY LIVE MINUTES PAD
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="stenoMinutesModal">
+    <div class="modal-dialog" style="max-width: 720px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <svg width="20" height="20" style="color:var(--court-gold-400);"><use href="#icon-orders"></use></svg>
+          <h3>Court Stenographer & Minutes Dictation Pad</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('stenoMinutesModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="stenoMinutesForm" onsubmit="handleStenoMinutesSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Case Currently Called in Courtroom 04</label>
+            <select id="stenoCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Presiding Judge</label>
+              <input type="text" class="form-control" value="Hon'ble Justice Rajesh Sharma" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Stenographer In-Charge</label>
+              <input type="text" class="form-control" value="Court Stenographer (Official Record)" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Live Hearing Minutes & Stenographic Record</label>
+            <textarea id="stenoNotesText" class="steno-pad form-control" placeholder="Type verbatim oral submissions, appearances, questions put to counsel, and intermediate bench directions..." required>Adv. Raghavan Nair appeared for Petitioner. Adv. Sunita Deshmukh appeared for State Authority. Court queried regarding compliance with Section 11 notice. Respondent seeks 2 weeks to file additional affidavit.</textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:14px;">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Log Official Minutes to Case Proceedings
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: LAWYER FILE ADDITIONAL PLEADING / AFFIDAVIT
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="filePleadingModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>File Additional Pleading / Affidavit / Application</h3>
+        <button class="modal-close-btn" onclick="closeModal('filePleadingModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="filePleadingForm" onsubmit="handleFilePleadingSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Select Client Case</label>
+            <select id="pleadingCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Pleading Category</label>
+              <select id="pleadingCategory" class="custom-select" style="width:100%;" required>
+                <option value="Rejoinder Affidavit">Rejoinder Affidavit</option>
+                <option value="Written Statement of Defense">Written Statement of Defense</option>
+                <option value="Interlocutory Application (Stay / Injunction)">Interlocutory Application (Stay / Injunction)</option>
+                <option value="Urgent Bail Petition">Urgent Bail Petition</option>
+                <option value="Affidavit of Evidence PW-1">Affidavit of Evidence PW-1</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Document Title / File Label</label>
+              <input type="text" id="pleadingTitle" class="form-control" placeholder="e.g. Rejoinder_Affidavit_Phase2.pdf" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Summary of Relief / Grounds in this Filing</label>
+            <textarea id="pleadingSummary" class="form-control" rows="3" placeholder="Brief summary of additional grounds, annexures, or prayers..." required></textarea>
+          </div>
+
+          <div class="doc-upload-box" onclick="showToast('Simulated PDF document attached with cryptographic hash', 'success')">
+            <svg width="24" height="24" style="color:var(--court-navy-600);"><use href="#icon-file-plus"></use></svg>
+            <div style="font-weight:600; margin-top:4px;">Attach Signed Digital PDF</div>
+            <span style="font-size:11px; color:var(--slate-400);">Simulated digital vault supporting PDF format with automated sha256 checksum</span>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:16px;">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Submit Pleading into Case Vault
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: CLERK REGISTER PHYSICAL EVIDENCE EXHIBIT
+       ========================================================================== -->
+  <div class="modal-backdrop hidden" id="exhibitModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Register Evidence Exhibit in Custody Vault</h3>
+        <button class="modal-close-btn" onclick="closeModal('exhibitModal')">
+          <svg width="16" height="16"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="exhibitForm" onsubmit="handleExhibitSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Target Case</label>
+            <select id="exhibitCaseSelect" class="custom-select" style="width:100%;" required>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <div class="form-grid-2col">
+            <div class="form-group">
+              <label class="form-label">Exhibit Mark Identification</label>
+              <input type="text" id="exhibitMark" class="form-control" placeholder="e.g. Exhibit P-1 / Exhibit D-2" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Submitting Party</label>
+              <select id="exhibitParty" class="custom-select" style="width:100%;">
+                <option value="Petitioner / Plaintiff">Petitioner / Plaintiff</option>
+                <option value="Respondent / Defendant">Respondent / Defendant</option>
+                <option value="Court Expert / Witness">Court Expert / Witness</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description of Evidence Object / Document</label>
+            <input type="text" id="exhibitDesc" class="form-control" placeholder="e.g. Original Concession Agreement with seal & stamps" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Physical Custody Storage Vault</label>
+            <input type="text" id="exhibitCustody" class="form-control" value="Court Evidence Vault — Locker B-09" required>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:14px;">
+            <svg width="18" height="18"><use href="#icon-check"></use></svg>
+            Mark & Deposit in Evidence Vault
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div id="toastContainer"></div>
+
+  <!-- Application Script -->
+  <script src="script.js"></script>
 </body>
 </html>
