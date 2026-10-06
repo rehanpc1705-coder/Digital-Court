@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Court Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+```
+<!-- Login Section -->
+<div id="loginPage" class="login-container">
+
+    <div class="login-box">
+        <h1>Digital Court</h1>
+        <p class="subtitle">Management System</p>
+
+        <form id="loginForm">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password" required>
+
+            <button type="submit">Login</button>
+
+            <p id="loginMessage"></p>
+        </form>
+    </div>
+
+</div>
+
+
+<!-- Main Application -->
+<div id="dashboardPage" class="hidden">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Digital Court
+        </div>
+
+        <div class="nav-links">
+            <a href="#" onclick="showSection('dashboard')">Dashboard</a>
+            <a href="#" onclick="showSection('cases')">Cases</a>
+            <a href="#" onclick="showSection('addCase')">Add Case</a>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+    </nav>
+
+
+    <main>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="section">
+
+            <h2>Dashboard</h2>
+            <p>Welcome to the Digital Court Management System.</p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Cases</h3>
+                    <p id="totalCases">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Pending Cases</h3>
+                    <p id="pendingCases">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Completed Cases</h3>
+                    <p id="completedCases">0</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Cases Section -->
+        <section id="cases" class="section hidden">
+
+            <h2>Case Management</h2>
+
+            <input
+                type="text"
+                id="searchCase"
+                placeholder="Search by case number or case title..."
+                onkeyup="searchCases()"
+            >
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Case No.</th>
+                        <th>Case Title</th>
+                        <th>Judge</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="caseTableBody">
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Add Case Section -->
+        <section id="addCase" class="section hidden">
+
+            <h2>Register New Case</h2>
+
+            <form id="caseForm" class="case-form">
+
+                <label>Case Number</label>
+                <input
+                    type="text"
+                    id="caseNumber"
+                    placeholder="Example: DC-104"
+                    required
+                >
+
+                <label>Case Title</label>
+                <input
+                    type="text"
+                    id="caseTitle"
+                    placeholder="Enter case title"
+                    required
+                >
+
+                <label>Judge Name</label>
+                <input
+                    type="text"
+                    id="judgeName"
+                    placeholder="Enter judge name"
+                    required
+                >
+
+                <label>Hearing Date</label>
+                <input
+                    type="date"
+                    id="hearingDate"
+                    required
+                >
+
+                <label>Case Status</label>
+
+                <select id="caseStatus">
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <button type="submit">Add Case</button>
+
+            </form>
+
+            <p id="caseMessage"></p>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
